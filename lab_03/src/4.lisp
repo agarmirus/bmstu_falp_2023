@@ -1,0 +1,5 @@
+(defun fst_is_med (num1 num2 num3)
+    (or (and    (> num1 num2)
+                (< num1 num3))
+        (and    (> num1 num3)
+                (< num1 num2))))

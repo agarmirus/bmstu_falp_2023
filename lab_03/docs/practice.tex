@@ -1,0 +1,117 @@
+\chapter{Практические задания}
+
+\section{Задание 1. Написать функцию, которая принимает целое число и возвращает первое четное число, не меньшее аргумента}
+
+\begin{lstlisting}
+(defun min_even (num)
+	(if (evenp num)
+			num
+			(+ num 1)))
+\end{lstlisting}
+
+\section{Задание 2. Написать функцию, которая принимает число и возвращает число того же знака, но с модулем на 1 больше модуля аргумента}
+
+\begin{lstlisting}
+(defun inc_abs (num)
+		(if (minusp num)
+				(- num 1)
+				(+ num 1)))
+\end{lstlisting}
+
+\section{Задание 3. Написать функцию, которая принимает два числа и возвращает список из этих чисел, расположенный по возрастанию}
+
+\begin{lstlisting}
+(defun init_two_num_list (a b)
+		(if (> a b)
+				(cons   b
+								(cons a Nil))
+				(cons   a
+								(cons b Nil))))
+\end{lstlisting}
+
+\section{Задание 4. Написать функцию, которая принимает три числа и возвращает Т только тогда, когда первое число расположено между вторым и третьим}
+
+\begin{lstlisting}
+(defun fst_is_med (num1 num2 num3)
+		(or (and    (> num1 num2)
+								(< num1 num3))
+				(and    (> num1 num3)
+								(< num1 num2))))
+\end{lstlisting}
+
+\section{Задание 5. Каков результат вычисления следующих выражений?}
+
+\begin{center}
+	\begin{threeparttable}
+		\captionsetup{justification=raggedright,singlelinecheck=off}
+		\caption{\label{5}Результаты вычисления выражений}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			Выражение & Результат\\
+			\hline
+			(and 'fee 'fie 'foe) & foe\\
+			\hline
+			(or nil 'fie 'foe) & fie\\
+			\hline
+			(and (equal 'abc 'abc) 'yes) & yes\\
+			\hline
+			(or 'fee 'fie 'foe) & fee\\
+			\hline
+			(and nil 'fie 'foe) & Nil\\
+			\hline
+			(or (equal 'abc 'abc) 'yes) & T\\
+			\hline
+		\end{tabular}
+	\end{threeparttable}
+\end{center}
+
+\section{Задание 6. Написать предикат, который принимает два числа-аргумента и возвращает Т, если первое число не меньше второго}
+
+\begin{lstlisting}
+(defun ge (a b)
+		(eq (< a b)
+				Nil))
+\end{lstlisting}
+
+\section{Задание 7. Какой из следующих двух вариантов предиката ошибочен и почему?}
+
+\begin{lstlisting}
+(defun pred1 (x) 
+	(and (numberp x) (plusp x)))
+\end{lstlisting}
+или
+\begin{lstlisting}
+(defun pred2 (x)
+	(and (plusp x) (numberp x)))
+\end{lstlisting}
+
+Ошибочным является предикат pred2, поскольку выражение (plusp~x) будет вычислено раньше, чем выражение (numberp~x). Если предикату pred2 передать в качестве аргумента символьный атом, то выражение (plusp~x) не может быть вычислено, поскольку функция plusp может обрабатывать только вещественные числа.
+
+\section{Задание 8. Решить задачу 4, используя для ее решения конструкции: только IF, только COND, только AND/OR}
+
+\begin{lstlisting}
+(defun fst_is_med (num1 num2 num3)
+		(if (> num1 num2)
+				(< num1 num3)
+				(if (> num1 num3)
+						(< num1 num2))))
+\end{lstlisting}
+\begin{lstlisting}
+(defun fst_is_med (num1 num2 num3)
+		(cond   (   (> num1 num2)
+								(cond ((< num1 num3))))
+						(   (> num1 num3)
+								(cond ((< num1 num2))))))
+\end{lstlisting}
+\begin{lstlisting}
+(defun fst_is_med (num1 num2 num3)
+		(or (and    (> num1 num2)
+								(< num1 num3))
+				(and    (> num1 num3)
+								(< num1 num2))))
+\end{lstlisting}
+
+\section{Задание 9. Переписать функцию how-alike, приведенную в лекции и использующую COND, используя только конструкции IF, AND/OR}
+
+\clearpage
